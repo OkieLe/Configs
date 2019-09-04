@@ -1,0 +1,27 @@
+[color]
+    ui = true
+[core]
+    editor = vim
+	excludesfile = ~/.gitignore_global
+[commit]
+	template = ~/.gittemplate
+[alias]
+    cm = commit
+    co = checkout
+    st = status
+    pl = pull
+    lg = log --pretty=oneline
+    sh = show
+    df = diff
+    sa = stash
+    br = branch
+    cp = cherry-pick
+[difftool "sourcetree"]
+	cmd = opendiff \"$LOCAL\" \"$REMOTE\"
+	path = 
+[mergetool "sourcetree"]
+	cmd = /Applications/Sourcetree.app/Contents/Resources/opendiff-w.sh \"$LOCAL\" \"$REMOTE\" -ancestor \"$BASE\" -merge \"$MERGED\"
+	trustExitCode = true
+[user]
+	name = Le Xing
+	email = xingled@gmail.com
