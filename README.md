@@ -2,5 +2,5 @@
 
 Configs of my tools
 
-- Vim
+- [Vim](https://github.com/jie-meng/VimConfig)
 - Git
