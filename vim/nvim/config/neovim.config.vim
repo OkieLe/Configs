@@ -1,5 +1,6 @@
 " support mouse
 :set mouse=a
+let mapleader=","
 
 " global 
 filetype on

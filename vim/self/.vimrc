@@ -5,6 +5,7 @@ Plug 'scrooloose/nerdtree'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'xolox/vim-misc'
+Plug 'jistr/vim-nerdtree-tabs'
 
 " search
 Plug 'junegunn/fzf'
@@ -24,6 +25,7 @@ Plug 'junegunn/gv.vim'
 
 " color
 Plug 'flazz/vim-colorschemes'
+Plug 'rakr/vim-one'
 
 " complete
 Plug 'raimondi/delimitmate'
@@ -64,12 +66,13 @@ set smartindent
 """ set ignorecase
 
 "" color
-colorscheme gruvbox
+""" colorscheme gruvbox
 """ colorscheme molokai
 """ colorscheme wombat
 """ colorscheme solarized
 """ colorscheme ir_black
 """ colorscheme atom
+colorscheme one
 
 "" highligt search if colorscheme does not well such as 'ir_black'
 """ hi Search guibg=peru guifg=wheat
@@ -77,6 +80,8 @@ colorscheme gruvbox
 "" filetype extension 
 "" java
 au BufNewFile,BufRead *.java,*.jav,*.aidl setf java
+
+let mapleader=","
 
 "" quick edit vimrc
 map <Leader><F2> :e ~/.vimrc<CR>
@@ -115,9 +120,9 @@ set shiftwidth=4
 
 "" font
 if has('macunix')
-    set guifont=Monaco:h12
+    set guifont=Monaco:h16
 elseif has('unix')
-    set guifont="Ubuntu Mono" 12
+    set guifont="Ubuntu Mono" 16
 endif
 
 "" resize window
@@ -128,8 +133,8 @@ map <Leader>, :resize -10<Enter>
 
 "" hightline current line and column
 au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline cursorcolumn
-set cursorline cursorcolumn
+au WinEnter * set cursorline nocursorcolumn
+set cursorline nocursorcolumn
 
 " scrooloose/nerdtree
 "" open a NERDTree automatically when vim starts up
@@ -156,6 +161,9 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeChDirMode = 2
 "" startup cursor in editing area
 autocmd VimEnter * NERDTree | wincmd p
+let NERDTreeShowLineNumbers=1
+let NERDTreeShowHidden=1
+let g:nerdtree_tabs_open_on_console_startup = 1
 
 " vim-fugitive'
 nnoremap <Leader>gs :Gstatus<CR>
@@ -195,7 +203,9 @@ map <Leader>` :ter ++rows=11<CR>
 tnoremap <F3> <C-\><C-n>
 
 " tagbar
-nnoremap <Leader><F12> :TagbarOpenAutoClose<CR>
+nmap <F9> :TagbarToggle<CR>
+nnoremap <F10> :TagbarOpenAutoClose<CR>
+let g:tagbar_autofocus = 1
 
 " previm
 if has('macunix')
