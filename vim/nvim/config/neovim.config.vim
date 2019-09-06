@@ -18,6 +18,9 @@ set backspace=indent,eol,start
 set smartindent
 """ set ignorecase
 
+" ctags
+map <Leader>rr :!ctags -R --exclude=.git --exclude=node_modules --exclude=log *<Enter>
+
 " Alt + * move line
 " http://vim.wikia.com/wiki/Moving_lines_up_or_down
 if has('macunix')
@@ -47,6 +50,9 @@ nnoremap mb ^
 nnoremap me $
 vnoremap mb ^
 vnoremap me $
+
+"" remap C-p to C-i, because C-i sometimes override by other shortcuts
+nnoremap <C-p> <C-i>
 
 " quit
 nmap <Leader>w :wq<Enter>
@@ -108,7 +114,7 @@ map <Leader>sv :vsplit<Enter>
 map <Leader>sh :split<Enter>
 
 " Toggle terminal
-nnoremap <F3> :call ToggleTerm("term-slider", 1)<CR>
+nnoremap <F2> :call ToggleTerm("term-slider", 1)<CR>
  
 function! ToggleTerm(termname, slider)
     let pane = bufwinnr(a:termname)
