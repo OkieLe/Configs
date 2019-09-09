@@ -2,6 +2,7 @@ call plug#begin('~/.vim/plugged')
 
 " window
 Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'majutsushi/tagbar'
 Plug 'vim-airline/vim-airline'
 Plug 'xolox/vim-misc'
@@ -123,9 +124,9 @@ set shiftwidth=4
 
 "" font
 if has('macunix')
-    set guifont=Monaco:h16
+    set guifont=Monaco:h12
 elseif has('unix')
-    set guifont="Ubuntu Mono" 16
+    set guifont="Ubuntu Mono" 12
 endif
 
 "" resize window
@@ -136,8 +137,8 @@ map <Leader>, :resize -10<Enter>
 
 "" hightline current line and column
 au WinLeave * set nocursorline nocursorcolumn
-au WinEnter * set cursorline nocursorcolumn
-set cursorline nocursorcolumn
+au WinEnter * set cursorline cursorcolumn
+set cursorline cursorcolumn
 
 " scrooloose/nerdtree
 "" open a NERDTree automatically when vim starts up
@@ -153,8 +154,7 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 "" toggle tree
 map <Leader>w :NERDTreeToggle<Enter>
 "" locate current file in the tree
-nnoremap <Leader>j :NERDTreeFind<Enter>
-inoremap <Leader>j <Esc>:NERDTreeFind<Enter>
+nnoremap <silent> <space>j :NERDTreeFind<Enter>
 """ autocmd BufWinEnter * NERDTreeFind
 "" folder icon
 let g:NERDTreeDirArrowExpandable = '▸'
@@ -214,9 +214,7 @@ nnoremap <F2> :ter ++rows=11<CR>
 tnoremap <F3> <C-\><C-n>
 
 " tagbar
-nmap <F9> :TagbarToggle<CR>
 nnoremap <Leader><F12> :TagbarOpenAutoClose<CR>
-let g:tagbar_autofocus = 1
 
 " previm
 if has('macunix')
