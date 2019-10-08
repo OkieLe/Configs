@@ -1,7 +1,8 @@
 " https://github.com/neoclide/coc.nvim
 
 " extensions
-let g:coc_global_extensions = ['coc-python', 'coc-java', 'coc-tslint-plugin', 'coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-highlight', 'coc-lists']
+" let g:coc_global_extensions = ['coc-python', 'coc-java', 'coc-tslint-plugin', 'coc-eslint', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-highlight', 'coc-lists']
+let g:coc_global_extensions = ['coc-python', 'coc-java', 'coc-tslint-plugin', 'coc-tsserver', 'coc-emmet', 'coc-css', 'coc-html', 'coc-json', 'coc-yank', 'coc-prettier', 'coc-highlight', 'coc-lists']
 
 " extensions->coc-tsserver
 " Note: for React to work as expected, you need your JSX filetype to be javascript.jsx and your TSX filetype to be typescript.jsx or typescript.tsx. In coc.nvim, these filetypes are mapped to javascriptreact and typescriptreact because that's what tsserver uses.
@@ -26,6 +27,9 @@ set shortmess+=c
 
 " always show signcolumns
 set signcolumn=yes
+
+" Restart coc, when there shouldn't have any error but many error displaying. you can use this to refresh coc
+nmap <silent> <space>r :<C-u>CocRestart<cr>
 
 " Use tab for trigger completion with characters ahead and navigate.
 " Use command ':verbose imap <tab>' to make sure tab is not mapped by other plugin.
@@ -129,3 +133,11 @@ nnoremap <silent> <space>gc  :exe 'CocList -I --input='.expand('<cword>').' grep
 " Search in current file
 nnoremap <silent> <space>w  :<C-u>CocList words<cr>
 nnoremap <silent> <space>wc  :exe 'CocList -I --input='.expand('<cword>').' words'<CR>
+
+" Remap keys for gotos
+nmap <silent> gy <Plug>(coc-type-definition)
+nmap <silent> gi <Plug>(coc-implementation)
+nmap <silent> gr <Plug>(coc-references)
+
+" Remap for rename current word
+nmap <leader>rn <Plug>(coc-rename)
