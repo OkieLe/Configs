@@ -33,7 +33,7 @@ Plug 'raimondi/delimitmate'
 Plug 'vim-scripts/AutoComplPop'
 Plug 'ervandew/supertab'
 Plug 'honza/vim-snippets'
-Plug 'sirver/ultisnips'
+" Plug 'sirver/ultisnips'
 Plug 'davidhalter/jedi-vim'
 
 " language
