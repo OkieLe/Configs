@@ -17,5 +17,5 @@
     br = branch
     cp = cherry-pick
 [user]
-	name = Le Xing
-	email = xingled@gmail.com
+    name = Le Xing
+    email = xingled@gmail.com

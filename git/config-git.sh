@@ -1,3 +1,5 @@
 #!/bin/sh
 
-cp git/* ~/
+cp .gitconfig ~/
+cp .gitignore_global ~/
+cp .gittemplate ~/
