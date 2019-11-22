@@ -2,7 +2,7 @@
 # export PATH=$HOME/bin:/usr/local/bin:$PATH
 
 # Path to your oh-my-zsh installation.
-export ZSH="/Users/lxing/.oh-my-zsh"
+export ZSH="$HOME/.oh-my-zsh"
 
 export ANDROID_HOME=$HOME/Library/Android/sdk
 export PATH=$PATH:$ANDROID_HOME/tools
@@ -74,7 +74,6 @@ plugins=(
   z
   zsh-syntax-highlighting
   zsh-autosuggestions
-  zsh-nvm
 )
 
 source $ZSH/oh-my-zsh.sh
@@ -111,6 +110,8 @@ source $ZSH/oh-my-zsh.sh
 # export FLUTTER_STORAGE_BASE_URL="https://storage.flutter-io.cn"
 # export PUB_HOSTED_URL="https://pub.flutter-io.cn"
 
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
+
 export PATH="$HOME/Applications/flutter/bin:$PATH"
 export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
 
@@ -120,4 +121,3 @@ export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
 [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
