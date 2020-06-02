@@ -11,7 +11,10 @@ Plug 'scrooloose/nerdtree'
 Plug 'Xuyuanp/nerdtree-git-plugin'
 
 " colorschemes
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
+Plug 'morhetz/gruvbox'
+Plug 'dracula/vim'
+Plug 'rakr/vim-one'
 
 " edit
 Plug 'skwp/greplace.vim'

@@ -14,10 +14,10 @@ Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 
 " edit
-Plug 'terryma/vim-multiple-cursors'
 Plug 'skwp/greplace.vim'
 Plug 'arthurxavierx/vim-caser'
 Plug 'scrooloose/nerdcommenter'
+Plug 'jiangmiao/auto-pairs'
 
 " git
 Plug 'tpope/vim-fugitive'
@@ -25,7 +25,9 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 
 " color
-Plug 'flazz/vim-colorschemes'
+" Plug 'flazz/vim-colorschemes'
+Plug 'morhetz/gruvbox'
+Plug 'dracula/vim'
 Plug 'rakr/vim-one'
 
 " complete
@@ -47,6 +49,7 @@ Plug 'vim-scripts/a.vim'
 
 " tools
 Plug 'w0rp/ale'
+Plug 'will133/vim-dirdiff'
 
 call plug#end()
 
@@ -67,19 +70,15 @@ set smartindent
 """ set ignorecase
 
 "" color
-""" colorscheme gruvbox
-""" colorscheme molokai
-""" colorscheme wombat
-""" colorscheme solarized
-""" colorscheme ir_black
-""" colorscheme atom
-colorscheme one
-
-"" remap C-p to C-i, because C-i sometimes override by other shortcuts
-nnoremap <C-p> <C-i>
+colorscheme gruvbox
+""" colorscheme dracula
+""" colorscheme one
 
 "" highligt search if colorscheme does not well such as 'ir_black'
 """ hi Search guibg=peru guifg=wheat
+
+"" remap C-p to C-i, because C-i sometimes override by other shortcuts
+nnoremap <C-p> <C-i>
 
 "" filetype extension 
 "" java
@@ -90,7 +89,7 @@ let mapleader=","
 "" quick edit vimrc
 map <Leader><F2> :e ~/.vimrc<CR>
 
-"" chagne buffer
+"" change buffer
 map <Leader>[ :bp<Enter>
 map <Leader>] :bn<Enter>
 

@@ -2,8 +2,5 @@
 
 " use theme
 """ colorscheme gruvbox
-""" colorscheme molokai
-""" colorscheme wombat
-""" colorscheme solarized
-""" colorscheme ir_black
 colorscheme dracula
+""" colorscheme one
