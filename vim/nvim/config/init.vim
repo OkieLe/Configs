@@ -36,6 +36,9 @@ Plug 'ap/vim-css-color'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'vim-scripts/a.vim'
 
+" lint
+Plug 'scrooloose/syntastic'
+
 lang zh_CN.UTF-8
 
 call plug#end()
