@@ -2,7 +2,7 @@
 
 " previm
 if has('macunix')
-    let g:previm_open_cmd = 'open -a Google\ Chrome'
+    let g:previm_open_cmd = 'open -a Microsoft\ Edge'
 elseif has('unix')
     let g:previm_open_cmd = 'open -a Firefox'
 endif
