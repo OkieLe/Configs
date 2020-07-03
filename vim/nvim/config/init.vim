@@ -15,6 +15,7 @@ Plug 'Xuyuanp/nerdtree-git-plugin'
 Plug 'morhetz/gruvbox'
 Plug 'dracula/vim'
 Plug 'rakr/vim-one'
+Plug 'tomasiser/vim-code-dark'
 
 " edit
 Plug 'skwp/greplace.vim'
@@ -50,6 +51,7 @@ source ~/.config/nvim/vim_airline.config.vim
 source ~/.config/nvim/coc.config.vim
 source ~/.config/nvim/colorschemes.config.vim
 source ~/.config/nvim/git_fugitive.config.vim
+source ~/.config/nvim/gitgutter.config.vim
 source ~/.config/nvim/greplace.config.vim
 source ~/.config/nvim/previm.config.vim
 source ~/.config/nvim/javascript_libraries_syntax.config.vim
