@@ -41,6 +41,7 @@ Plug 'vim-scripts/a.vim'
 Plug 'scrooloose/syntastic'
 
 lang zh_CN.UTF-8
+lang zh_TW.UTF-8
 
 call plug#end()
 

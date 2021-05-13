@@ -1,65 +1,10 @@
-call plug#begin('~/.vim/plugged')
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Basic configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 
-" window
-Plug 'scrooloose/nerdtree'
-Plug 'Xuyuanp/nerdtree-git-plugin'
-Plug 'majutsushi/tagbar'
-Plug 'vim-airline/vim-airline'
-Plug 'xolox/vim-misc'
-Plug 'jistr/vim-nerdtree-tabs'
-
-" search
-Plug 'junegunn/fzf'
-Plug 'junegunn/fzf.vim'
-Plug 'easymotion/vim-easymotion'
-
-" edit
-Plug 'skwp/greplace.vim'
-Plug 'arthurxavierx/vim-caser'
-Plug 'scrooloose/nerdcommenter'
-Plug 'jiangmiao/auto-pairs'
-
-" git
-Plug 'tpope/vim-fugitive'
-Plug 'airblade/vim-gitgutter'
-Plug 'junegunn/gv.vim'
-
-" color
-" Plug 'flazz/vim-colorschemes'
-Plug 'morhetz/gruvbox'
-Plug 'dracula/vim'
-Plug 'rakr/vim-one'
-Plug 'tomasiser/vim-code-dark'
-
-" complete
-Plug 'raimondi/delimitmate'
-Plug 'vim-scripts/AutoComplPop'
-Plug 'ervandew/supertab'
-Plug 'honza/vim-snippets'
-" Plug 'sirver/ultisnips'
-Plug 'davidhalter/jedi-vim'
-
-" language
-Plug 'sheerun/vim-polyglot'
-Plug 'moll/vim-node'
-Plug 'kannokanno/previm'
-Plug 'othree/javascript-libraries-syntax.vim'
-Plug 'ap/vim-css-color'
-Plug 'hail2u/vim-css3-syntax'
-Plug 'vim-scripts/a.vim'
-
-" tools
-Plug 'w0rp/ale'
-Plug 'will133/vim-dirdiff'
-
-" lint
-Plug 'scrooloose/syntastic'
-
-call plug#end()
-
-" global 
+" global
 filetype on
-syntax on 
+syntax on
 
 set nu
 set nowrap
@@ -71,6 +16,8 @@ set hlsearch
 set nocompatible
 set backspace=indent,eol,start
 set smartindent
+"" if hidden is not set, TextEdit might fail.
+set hidden
 """ set ignorecase
 
 " For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
@@ -85,29 +32,10 @@ if (has('termguicolors'))
   set termguicolors
 endif
 
-"" color
-colorscheme gruvbox
-""" colorscheme dracula
-""" colorscheme one
-""" colorscheme codedark
-
-"" colorscheme override
-hi Search guibg=peru guifg=wheat
-hi CursorLine term=bold cterm=bold guibg=Grey20
-hi CursorColumn term=bold cterm=bold guibg=Grey20
-
-"" popup menu override
-""" https://alvinalexander.com/linux/vi-vim-editor-color-scheme-syntax/
-""" https://vi.stackexchange.com/questions/12664/is-there-any-way-to-change-the-popup-menu-color
-""" :highlight Pmenu ctermbg=DarkMagenta guibg=DarkMagenta
-:highlight PmenuSel ctermbg=DarkCyan guibg=DarkCyan
-""" :highlight PmenuSbar ctermbg=DarkMagenta guibg=DarkMagenta
-""" :highlight PmenuThumb ctermbg=DarkMagenta guibg=DarkMagenta
-
 "" remap C-p to C-i, because C-i sometimes override by other shortcuts
 nnoremap <C-p> <C-i>
 
-"" filetype extension 
+"" filetype extension
 "" java
 au BufNewFile,BufRead *.java,*.jav,*.aidl setf java
 
@@ -123,7 +51,7 @@ map <Leader>] :bn<Enter>
 "" Disable swap
 set noswapfile
 
-"" enable clipboard 
+"" enable clipboard
 :inoremap <C-v> <ESC>"+pa
 :vnoremap <C-c> "+y
 :vnoremap<C-d> "+d
@@ -148,12 +76,32 @@ set tabstop=4
 set expandtab
 set shiftwidth=4
 
+"" tagbar
+nnoremap <Leader><F12> :TagbarOpenAutoClose<CR>
+
+"" Shifting blocks visually
+nnoremap > >
+nnoremap < <<
+vnoremap > >gv
+vnoremap < <gv
+
+"" terminal
+set splitbelow
+nnoremap <F2> :ter ++rows=11<CR>
+tnoremap <F3> <C-\><C-n>
+
 "" font
 if has('macunix')
     set guifont=Monaco:h12
 elseif has('unix')
     set guifont="Ubuntu Mono" 12
 endif
+
+"" ctags
+map <Leader>rr :!ctags -R --exclude=.git --exclude=node_modules --exclude=log *<Enter>
+
+"" disable auto-insert-line after RETURN on a autocomplete-list"
+inoremap <expr> <CR> pumvisible() ? "\<C-Y>" : "\<CR>"
 
 "" resize window
 map <Leader>= :vertical resize +10<Enter>
@@ -165,6 +113,96 @@ map <Leader>, :resize -10<Enter>
 au WinLeave * set nocursorline nocursorcolumn
 au WinEnter * set cursorline cursorcolumn
 set cursorline cursorcolumn
+
+"" close quickfix by type 'q'
+:autocmd FileType qf nnoremap <buffer>q :cclose<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Plugin configuration
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+call plug#begin('~/.vim/plugged')
+
+" window
+Plug 'scrooloose/nerdtree'
+Plug 'Xuyuanp/nerdtree-git-plugin'
+Plug 'majutsushi/tagbar'
+Plug 'vim-airline/vim-airline'
+Plug 'xolox/vim-misc'
+
+" search
+Plug 'junegunn/fzf'
+Plug 'junegunn/fzf.vim'
+Plug 'easymotion/vim-easymotion'
+
+" edit
+Plug 'skwp/greplace.vim'
+Plug 'arthurxavierx/vim-caser'
+Plug 'scrooloose/nerdcommenter'
+Plug 'jiangmiao/auto-pairs'
+
+" git
+Plug 'tpope/vim-fugitive'
+Plug 'airblade/vim-gitgutter'
+Plug 'junegunn/gv.vim'
+
+" color
+" Plug 'flazz/vim-colorschemes'
+" Plug 'rafi/awesome-vim-colorschemes'
+" Plug 'rubberduck203/aosp-vim'
+Plug 'morhetz/gruvbox'
+Plug 'dracula/vim'
+Plug 'rakr/vim-one'
+Plug 'tomasiser/vim-code-dark'
+
+" complete
+Plug 'vim-scripts/AutoComplPop'
+Plug 'ervandew/supertab'
+Plug 'honza/vim-snippets'
+Plug 'prabirshrestha/vim-lsp'
+Plug 'mattn/vim-lsp-settings'
+Plug 'prabirshrestha/asyncomplete.vim'
+Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'OmniSharp/omnisharp-vim'
+
+" language
+Plug 'sheerun/vim-polyglot'
+Plug 'moll/vim-node'
+Plug 'kannokanno/previm'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'ap/vim-css-color'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'vim-scripts/a.vim'
+
+" tools
+Plug 'w0rp/ale'
+Plug 'will133/vim-dirdiff'
+
+" lint
+Plug 'scrooloose/syntastic'
+
+call plug#end()
+
+""" colorscheme
+""" colorscheme ayu
+colorscheme gruvbox
+""" colorscheme dracula
+""" colorscheme one
+""" colorscheme codedark
+
+"" colorscheme override
+""" hi Search guibg=peru guifg=wheat
+""" hi CursorLine term=bold cterm=bold guibg=Grey20
+""" hi CursorColumn term=bold cterm=bold guibg=Grey20
+
+"" popup menu override
+""" https://alvinalexander.com/linux/vi-vim-editor-color-scheme-syntax/
+""" https://vi.stackexchange.com/questions/12664/is-there-any-way-to-change-the-popup-menu-color
+""" :highlight Pmenu ctermbg=DarkMagenta guibg=DarkMagenta
+""" :highlight PmenuSel ctermbg=DarkMagenta guibg=DarkMagenta
+""" :highlight PmenuSbar ctermbg=DarkMagenta guibg=DarkMagenta
+""" :highlight PmenuThumb ctermbg=DarkMagenta guibg=DarkMagenta
 
 " scrooloose/nerdtree
 "" open a NERDTree automatically when vim starts up
@@ -192,7 +230,6 @@ let g:NERDTreeChDirMode = 2
 autocmd VimEnter * NERDTree | wincmd p
 let NERDTreeShowLineNumbers=1
 let NERDTreeShowHidden=1
-let g:nerdtree_tabs_open_on_console_startup = 1
 
 " vim-fugitive'
 nnoremap <Leader>gs :Gstatus<CR>
@@ -208,16 +245,6 @@ nmap [t <Plug>(GitGutterPrevHunk)
 " fzf
 set rtp+=/usr/local/opt/fzf
 
-"""nnoremap <Leader>ff :Files<CR>
-"""nnoremap <Leader>fg :GFiles<CR>
-"""nnoremap <Leader>fb :Buffers<CR>
-"""nnoremap <Leader>fe :History<CR>
-"""nnoremap <Leader>ft :Tags<CR>
-"""nnoremap <Leader>fc :History:<CR>
-"""nnoremap <Leader>fa :Ag<Space>
-"""nnoremap <Leader>fs :Filetypes<CR>
-"""nnoremap <Leader>fd :Ag <C-R><C-W><CR>
-
 nnoremap <space>fg :GFiles<CR>
 nnoremap <space>ff :Files<CR>
 nnoremap <space>e :Buffers<CR>
@@ -225,9 +252,6 @@ nnoremap <space>h :History<CR>
 nnoremap <space>s :Tags<CR>
 nnoremap <space>g :Ag <Space>
 nnoremap <space>gc :Ag <C-R><C-W><CR>
-
-" ctags 
-map <Leader>rr :!ctags -R --exclude=.git --exclude=node_modules --exclude=log *<Enter>
 
 " bling/vim-airline
 "" smarter tab line
@@ -237,14 +261,6 @@ let g:airline#extensions#tabline#fnamemod = ':t'
 
 " pangloss/vim-javascript'
 let g:javascript_plugin_jsdoc = 1
-
-" terminal
-set splitbelow
-nnoremap <F2> :ter ++rows=11<CR>
-tnoremap <F3> <C-\><C-n>
-
-" tagbar
-nnoremap <Leader><F12> :TagbarOpenAutoClose<CR>
 
 " previm
 if has('macunix')
@@ -273,20 +289,12 @@ nnoremap <space>G :Gsearch<Space>
 " othree/javascript-libraries-syntax.vim
 let g:used_javascript_libs = 'jquery,underscore,backbone,react,vue'
 
-" sirver/ultisnips
-""" let g:UltiSnipsUsePythonVersion = 3
-
-" Shifting blocks visually
-nnoremap > >>
-nnoremap < << 
-vnoremap > >gv
-vnoremap < <gv
-
 " ale
 "" keep the sign gutter open
 let g:ale_sign_column_always = 1
 let g:ale_sign_error = '>>'
 let g:ale_sign_warning = '--'
+let g:ale_set_highlights = 0
 
 "" show errors or warnings in my statusline
 let g:airline#extensions#ale#enabled = 1
@@ -296,9 +304,10 @@ let g:ale_set_loclist = 0
 let g:ale_set_quickfix = 1
 
 "" only enable these linters
-"" let g:ale_linters = {
-"" \    'javascript': ['eslint']
-"" \}
+ let g:ale_linters = {
+ \    'javascript': ['eslint'],
+ \    'cs': ['OmniSharp']
+ \}
 
 "" Fix files with prettier, and then ESLint.
 let b:ale_fixers = ['prettier', 'eslint']
@@ -321,3 +330,102 @@ let g:NERDCompactSexyComs = 1
 
 "" Align line-wise comment delimiters flush left instead of following code indentation
 let g:NERDDefaultAlign = 'left'
+
+" vim-lsp
+function! s:on_lsp_buffer_enabled() abort
+    setlocal omnifunc=lsp#complete
+    setlocal signcolumn=yes
+    if exists('+tagfunc') | setlocal tagfunc=lsp#tagfunc | endif
+    nmap <buffer> gd <plug>(lsp-definition)
+    nmap <buffer> gs <plug>(lsp-document-symbol-search)
+    nmap <buffer> gS <plug>(lsp-workspace-symbol-search)
+    nmap <buffer> gi <plug>(lsp-implementation)
+    nmap <buffer> gt <plug>(lsp-type-definition)
+    nmap <buffer> [g <Plug>(lsp-previous-diagnostic)
+    nmap <buffer> ]g <Plug>(lsp-next-diagnostic)
+    nmap <buffer> K <plug>(lsp-hover)
+    nmap <buffer> <space>gr <plug>(lsp-references)
+    nmap <buffer> <space>rn <plug>(lsp-rename)
+
+    let g:lsp_format_sync_timeout = 1000
+    autocmd! BufWritePre *.rs,*.go call execute('LspDocumentFormatSync')
+
+    " refer to doc to add more commands
+endfunction
+
+augroup lsp_install
+    au!
+    " call s:on_lsp_buffer_enabled only for languages that has the server registered.
+    autocmd User lsp_buffer_enabled call s:on_lsp_buffer_enabled()
+augroup END
+
+"" vim-lsp register cpp server
+if executable('ccls')
+   au User lsp_setup call lsp#register_server({
+      \ 'name': 'ccls',
+      \ 'cmd': {server_info->['ccls']},
+      \ 'root_uri': {server_info->lsp#utils#path_to_uri(lsp#utils#find_nearest_parent_file_directory(lsp#utils#get_buffer_path(), 'compile_commands.json'))},
+      \ 'initialization_options': {'cache': {'directory': '/tmp/ccls/cache' }},
+      \ 'whitelist': ['c', 'cpp', 'cxx', 'objc', 'objcpp', 'cc'],
+      \ })
+endif
+
+" vim-lsp-settings
+""" https://github.com/mattn/vim-lsp-settings
+""" While editing a file with a supported filetype, :LspInstallServer server-name, if server-name not given, default server for the language will be used.
+""" :LspUninstallServer server-name
+
+" OmniSharp
+"" Compile omnisharp-roslyn locally and set the artifacts OmniSharp.exe to OmniSharp_server_path
+"" https://github.com/OmniSharp/omnisharp-roslyn
+"" Please set OMNI_SHARP_PATH in your .zshrc or .bashrc: export OMNI_SHARP_PATH={omni_sharp_executable_path}
+let g:OmniSharp_server_path = '/Users/jiemeng/programs/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/mono/OmniSharp.exe'
+
+"" The roslyn server releases come with an embedded Mono, but this can be overridden to use the installed Mono by setting g:OmniSharp_server_use_mono
+let g:OmniSharp_server_use_mono = 1
+
+"" Timeout in seconds to wait for a response from the server
+let g:OmniSharp_timeout = 1
+
+"" Get Code Issues and syntax errors
+let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
+augroup omnisharp_commands
+    autocmd!
+
+    "" Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
+    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+    "" automatic syntax check on events (TextChanged requires Vim 7.4)
+    "autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
+    "" The following commands are contextual, based on the current cursor position.
+    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
+    autocmd FileType cs nnoremap <space>fi :OmniSharpFindImplementations<cr>
+    autocmd FileType cs nnoremap <space>ft :OmniSharpFindType<cr>
+    autocmd FileType cs nnoremap <space>fs :OmniSharpFindSymbol<cr>
+    autocmd FileType cs nnoremap <space>gr :OmniSharpFindUsages<cr>
+    "" finds members in the current buffer
+    autocmd FileType cs nnoremap <space>fm :OmniSharpFindMembers<cr>
+    "" cursor can be anywhere on the line containing an issue
+    autocmd FileType cs nnoremap <space>fx :OmniSharpFixUsings<cr>
+    autocmd FileType cs nnoremap <space>tt :OmniSharpTypeLookup<cr>
+    autocmd FileType cs nnoremap <space>dc :OmniSharpDocumentation<cr>
+    "" navigate up by method/property/field
+    autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+    "" navigate down by method/property/field
+    autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
+    "" Contextual code actions (requires CtrlP or unite.vim)
+    autocmd FileType cs nnoremap <space>a :OmniSharpGetCodeActions<cr>
+    "" Run code actions with text selected in visual mode to extract method
+    autocmd FileType cs vnoremap <space>a :call OmniSharp#GetCodeActions('visual')<cr>
+    "" rename with dialog
+    autocmd FileType cs nnoremap <space>rn :OmniSharpRename<cr>
+    "" Force OmniSharp to reload the solution. Useful when switching branches etc.
+    autocmd FileType cs nnoremap <space>cf :OmniSharpCodeFormat<cr>
+    "" (Experimental - uses vim-dispatch or vimproc plugin) - Restart the omnisharp server for the current solution
+    autocmd FileType cs nnoremap <space>rs :OmniSharpRestartServer<cr>
+    "" Add syntax highlighting for types and interfaces
+    autocmd FileType cs nnoremap <space>th :OmniSharpHighlightTypes<cr>
+augroup END
+
