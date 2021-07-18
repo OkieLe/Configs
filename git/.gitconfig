@@ -19,3 +19,5 @@
 [user]
     name = Le Xing
     email = xingled@gmail.com
+[credential]
+	helper = osxkeychain
