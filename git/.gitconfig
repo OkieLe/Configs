@@ -21,3 +21,5 @@
     email = xingled@gmail.com
 [credential]
 	helper = osxkeychain
+[pull]
+    base = true
