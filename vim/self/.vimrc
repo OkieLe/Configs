@@ -16,6 +16,7 @@ set hlsearch
 set nocompatible
 set backspace=indent,eol,start
 set smartindent
+set wildignore+=*.pyc,*.o,*.obj,*.exe,*.class,*.DS_Store,*.meta
 "" if hidden is not set, TextEdit might fail.
 set hidden
 """ set ignorecase
@@ -228,6 +229,8 @@ let g:NERDTreeDirArrowCollapsible = '▾'
 let g:NERDTreeChDirMode = 2
 "" startup cursor in editing area
 autocmd VimEnter * NERDTree | wincmd p
+"" wildignore
+let NERDTreeRespectWildIgnore=1
 let NERDTreeShowLineNumbers=1
 let NERDTreeShowHidden=1
 
