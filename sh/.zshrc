@@ -67,10 +67,14 @@ ZSH_THEME="ys"
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
 plugins=(
+  brew
   git
   git-flow
+  colored-man-pages
   colorize
   extract
+  pip
+  python
   z
   zsh-syntax-highlighting
   zsh-autosuggestions
@@ -111,11 +115,6 @@ source $ZSH/oh-my-zsh.sh
 # export PUB_HOSTED_URL="https://pub.flutter-io.cn"
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE='fg=60'
-
-export PATH="$HOME/Applications/flutter/bin:$PATH"
-export PATH="$HOME/.yarn/bin:$HOME/.config/yarn/global/node_modules/.bin:$PATH"
-
-export PATH="/Users/lxing/.yarn/bin:/Users/lxing/.config/yarn/global/node_modules/.bin:/Users/lxing/Applications/flutter/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/lxing/Library/Android/sdk/tools:/Users/lxing/Library/Android/sdk/tools/bin:/Users/lxing/Library/Android/sdk/platform-tools:/Users/lxing/.vimpkg/bin"
 
 export NVM_DIR="$HOME/.nvm"
 [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
