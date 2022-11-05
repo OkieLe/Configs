@@ -36,6 +36,7 @@ Plug 'othree/javascript-libraries-syntax.vim'
 Plug 'ap/vim-css-color'
 Plug 'hail2u/vim-css3-syntax'
 Plug 'vim-scripts/a.vim'
+Plug 'dart-lang/dart-vim-plugin'
 
 " lint
 Plug 'scrooloose/syntastic'
