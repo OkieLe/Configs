@@ -20,6 +20,6 @@
     name = Le Xing
     email = xingled@gmail.com
 [credential]
-	helper = osxkeychain
+    helper = osxkeychain
 [pull]
     base = true
