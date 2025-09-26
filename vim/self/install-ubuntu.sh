@@ -5,10 +5,10 @@ main() {
     sudo apt-get install -y silversearcher-ag
 
     # ctags
-    sudo apt-get install -y ctags
+    sudo apt-get install -y universal-ctags
 
     # ccls
-    sudo snap install ccls --classic
+    sudo snap install ccls
 
     # vim-plug
     if [ ! -f "~/.vim/autoload/plug.vim" ]; then
