@@ -2,13 +2,13 @@
 
 main() {
     # ag
-    sudo apt-get install -y silversearcher-ag
+    sudo apt install -y silversearcher-ag
 
     # ctags
-    sudo apt-get install -y universal-ctags
+    sudo apt install -y universal-ctags
 
     # ccls
-    sudo snap install ccls
+    sudo apt install ccls
 
     # vim-plug
     if [ ! -f "~/.vim/autoload/plug.vim" ]; then
@@ -21,5 +21,3 @@ main() {
 
     vim -c :PlugInstall
 }
-
-main
