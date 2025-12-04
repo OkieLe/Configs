@@ -149,7 +149,13 @@ Plug 'airblade/vim-gitgutter'
 Plug 'junegunn/gv.vim'
 
 " color
+" Plug 'flazz/vim-colorschemes'
+" Plug 'rafi/awesome-vim-colorschemes'
+" Plug 'rubberduck203/aosp-vim'
 Plug 'morhetz/gruvbox'
+Plug 'dracula/vim'
+Plug 'rakr/vim-one'
+Plug 'tomasiser/vim-code-dark'
 
 " complete
 Plug 'vim-scripts/AutoComplPop'
@@ -159,6 +165,16 @@ Plug 'prabirshrestha/vim-lsp'
 Plug 'mattn/vim-lsp-settings'
 Plug 'prabirshrestha/asyncomplete.vim'
 Plug 'prabirshrestha/asyncomplete-lsp.vim'
+Plug 'OmniSharp/omnisharp-vim'
+
+" language
+Plug 'sheerun/vim-polyglot'
+Plug 'moll/vim-node'
+Plug 'kannokanno/previm'
+Plug 'othree/javascript-libraries-syntax.vim'
+Plug 'ap/vim-css-color'
+Plug 'hail2u/vim-css3-syntax'
+Plug 'vim-scripts/a.vim'
 
 " tools
 Plug 'w0rp/ale'
@@ -170,7 +186,24 @@ Plug 'scrooloose/syntastic'
 call plug#end()
 
 """ colorscheme
+""" colorscheme ayu
 colorscheme gruvbox
+""" colorscheme dracula
+""" colorscheme one
+""" colorscheme codedark
+
+"" colorscheme override
+""" hi Search guibg=peru guifg=wheat
+""" hi CursorLine term=bold cterm=bold guibg=Grey20
+""" hi CursorColumn term=bold cterm=bold guibg=Grey20
+
+"" popup menu override
+""" https://alvinalexander.com/linux/vi-vim-editor-color-scheme-syntax/
+""" https://vi.stackexchange.com/questions/12664/is-there-any-way-to-change-the-popup-menu-color
+""" :highlight Pmenu ctermbg=DarkMagenta guibg=DarkMagenta
+""" :highlight PmenuSel ctermbg=DarkMagenta guibg=DarkMagenta
+""" :highlight PmenuSbar ctermbg=DarkMagenta guibg=DarkMagenta
+""" :highlight PmenuThumb ctermbg=DarkMagenta guibg=DarkMagenta
 
 " scrooloose/nerdtree
 "" open a NERDTree automatically when vim starts up
@@ -229,6 +262,9 @@ let g:airline#extensions#tabline#enabled = 1
 "" configure the formatting of filenames
 let g:airline#extensions#tabline#fnamemod = ':t'
 
+" pangloss/vim-javascript'
+let g:javascript_plugin_jsdoc = 1
+
 " previm
 if has('macunix')
     let g:previm_open_cmd = 'open -a Google\ Chrome'
@@ -252,6 +288,9 @@ let g:grep_cmd_opts = '--line-numbers --noheading'
 """ 3. Invoke :Greplace to make your changes across all files. It will ask you interatively y/n/a - you can hit 'a' to do all.
 """ 4. Save changes to all files with :wall (write all)
 nnoremap <space>G :Gsearch<Space>
+
+" othree/javascript-libraries-syntax.vim
+let g:used_javascript_libs = 'jquery,underscore,backbone,react,vue'
 
 " ale
 "" keep the sign gutter open
@@ -339,6 +378,57 @@ endif
 """ While editing a file with a supported filetype, :LspInstallServer server-name, if server-name not given, default server for the language will be used.
 """ :LspUninstallServer server-name
 
+" OmniSharp
+"" Compile omnisharp-roslyn locally and set the artifacts OmniSharp.exe to OmniSharp_server_path
+"" https://github.com/OmniSharp/omnisharp-roslyn
+"" Please set OMNI_SHARP_PATH in your .zshrc or .bashrc: export OMNI_SHARP_PATH={omni_sharp_executable_path}
+let g:OmniSharp_server_path = '/Users/jiemeng/programs/omnisharp-roslyn/artifacts/publish/OmniSharp.Stdio.Driver/mono/OmniSharp.exe'
+
+"" The roslyn server releases come with an embedded Mono, but this can be overridden to use the installed Mono by setting g:OmniSharp_server_use_mono
+let g:OmniSharp_server_use_mono = 1
+
+"" Timeout in seconds to wait for a response from the server
+let g:OmniSharp_timeout = 1
+
 "" Get Code Issues and syntax errors
 let g:syntastic_cs_checkers = ['syntax', 'semantic', 'issues']
+
+augroup omnisharp_commands
+    autocmd!
+
+    "" Set autocomplete function to OmniSharp (if not using YouCompleteMe completion plugin)
+    autocmd FileType cs setlocal omnifunc=OmniSharp#Complete
+
+    "" automatic syntax check on events (TextChanged requires Vim 7.4)
+    "autocmd BufEnter,TextChanged,InsertLeave *.cs SyntasticCheck
+
+    "" The following commands are contextual, based on the current cursor position.
+    autocmd FileType cs nnoremap gd :OmniSharpGotoDefinition<cr>
+    autocmd FileType cs nnoremap <space>fi :OmniSharpFindImplementations<cr>
+    autocmd FileType cs nnoremap <space>ft :OmniSharpFindType<cr>
+    autocmd FileType cs nnoremap <space>fs :OmniSharpFindSymbol<cr>
+    autocmd FileType cs nnoremap <space>gr :OmniSharpFindUsages<cr>
+    "" finds members in the current buffer
+    autocmd FileType cs nnoremap <space>fm :OmniSharpFindMembers<cr>
+    "" cursor can be anywhere on the line containing an issue
+    autocmd FileType cs nnoremap <space>fx :OmniSharpFixUsings<cr>
+    autocmd FileType cs nnoremap <space>tt :OmniSharpTypeLookup<cr>
+    autocmd FileType cs nnoremap <space>dc :OmniSharpDocumentation<cr>
+    "" navigate up by method/property/field
+    autocmd FileType cs nnoremap <C-K> :OmniSharpNavigateUp<cr>
+    "" navigate down by method/property/field
+    autocmd FileType cs nnoremap <C-J> :OmniSharpNavigateDown<cr>
+    "" Contextual code actions (requires CtrlP or unite.vim)
+    autocmd FileType cs nnoremap <space>a :OmniSharpGetCodeActions<cr>
+    "" Run code actions with text selected in visual mode to extract method
+    autocmd FileType cs vnoremap <space>a :call OmniSharp#GetCodeActions('visual')<cr>
+    "" rename with dialog
+    autocmd FileType cs nnoremap <space>rn :OmniSharpRename<cr>
+    "" Force OmniSharp to reload the solution. Useful when switching branches etc.
+    autocmd FileType cs nnoremap <space>cf :OmniSharpCodeFormat<cr>
+    "" (Experimental - uses vim-dispatch or vimproc plugin) - Restart the omnisharp server for the current solution
+    autocmd FileType cs nnoremap <space>rs :OmniSharpRestartServer<cr>
+    "" Add syntax highlighting for types and interfaces
+    autocmd FileType cs nnoremap <space>th :OmniSharpHighlightTypes<cr>
+augroup END
 

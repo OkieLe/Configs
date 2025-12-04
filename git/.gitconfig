@@ -1,7 +1,7 @@
 [color]
     ui = true
 [core]
-    editor = nvim
+    editor = vim
     excludesfile = ~/.gitignore_global
 [commit]
     template = ~/.gittemplate
@@ -17,7 +17,7 @@
     br = branch
     cp = cherry-pick
 [user]
-    name = Le Xing
+    name = Le
     email = xingled@gmail.com
 [credential]
     helper = osxkeychain
