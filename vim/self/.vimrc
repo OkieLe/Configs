@@ -21,11 +21,6 @@ set wildignore+=*.pyc,*.o,*.obj,*.exe,*.class,*.DS_Store,*.meta
 set hidden
 """ set ignorecase
 
-" For Neovim 0.1.3 and 0.1.4 - https://github.com/neovim/neovim/pull/2198
-if (has('nvim'))
-  let $NVIM_TUI_ENABLE_TRUE_COLOR = 1
-endif
-
 " For Neovim > 0.1.5 and Vim > patch 7.4.1799 - https://github.com/vim/vim/commit/61be73bb0f965a895bfb064ea3e55476ac175162
 " Based on Vim patch 7.4.1770 (`guicolors` option) - https://github.com/vim/vim/commit/8a633e3427b47286869aa4b96f2bfc1fe65b25cd
 " https://github.com/neovim/neovim/wiki/Following-HEAD#20160511
@@ -39,6 +34,10 @@ nnoremap <C-p> <C-i>
 "" filetype extension
 "" java
 au BufNewFile,BufRead *.java,*.jav,*.aidl setf java
+
+"" for search
+set grepprg=rg
+let g:grep_cmd_opts = '--line-numbers --noheading --color=always --smart-case'
 
 let mapleader=","
 
@@ -138,7 +137,6 @@ Plug 'junegunn/fzf.vim'
 Plug 'easymotion/vim-easymotion'
 
 " edit
-Plug 'skwp/greplace.vim'
 Plug 'arthurxavierx/vim-caser'
 Plug 'scrooloose/nerdcommenter'
 Plug 'jiangmiao/auto-pairs'
@@ -220,8 +218,8 @@ nnoremap <space>ff :Files<CR>
 nnoremap <space>e :Buffers<CR>
 nnoremap <space>h :History<CR>
 nnoremap <space>s :Tags<CR>
-nnoremap <space>g :Ag <Space>
-nnoremap <space>gc :Ag <C-R><C-W><CR>
+nnoremap <space>g :Rg <Space>
+nnoremap <space>gc :Rg <C-R><C-W><CR>
 
 " bling/vim-airline
 "" smarter tab line
@@ -243,15 +241,6 @@ let g:previm_show_header = 0
 " supertab
 let g:SuperTabMappingForward = '<s-tab>'
 let g:SuperTabMappingBackward = '<tab>'
-
-" skwp/greplace
-set grepprg=ag
-let g:grep_cmd_opts = '--line-numbers --noheading'
-""" 1. Use :Gsearch to get a buffer window of your search results
-""" 2. then you can make the replacements inside the buffer window using traditional tools (%s/foo/bar/)
-""" 3. Invoke :Greplace to make your changes across all files. It will ask you interatively y/n/a - you can hit 'a' to do all.
-""" 4. Save changes to all files with :wall (write all)
-nnoremap <space>G :Gsearch<Space>
 
 " ale
 "" keep the sign gutter open
